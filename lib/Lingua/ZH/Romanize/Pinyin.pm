@@ -24,18 +24,22 @@ Lingua::ZH::Romanize::Pinyin - Romanization of Standard Chinese language
 
 Pinyin is a phonemic notation of Chinese characters.
 
-    $conv = Lingua::ZH::Romanize::Pinyin->new();
+=head2 $conv = Lingua::ZH::Romanize::Pinyin->new();
 
 This constructer methods returns a new object with its dictionary cached.
 
-    $roman = $conv->char( $hanji );
+=head2 $roman = $conv->char( $hanji );
 
 This method returns romanized letters of a Hanji character.
 It returns undef when $hanji is not a valid Hanji character.
 The argument's encoding must be UTF-8.
 Both of Simplified Chinese and Traditional Chinese are allowed.
 
-    @array = $conv->string( $string );
+=head2 $roman = $conv->chars( $string );
+
+This method returns romanized letters of Hanji characters.
+
+=head2 @array = $conv->string( $string );
 
 This method returns a array of referenced arrays
 which are pairs of a Hanji chacater and its romanized letters.
@@ -47,7 +51,7 @@ which are pairs of a Hanji chacater and its romanized letters.
 =head1 DICTIONARY
 
 This module's Hanji to roman mapping table is based on
-PY.tit file which was distributed with cxterm.
+PY.tit file which is distributed with cxterm.
 
 =head1 MODULE DEPENDENCIES
 
@@ -56,14 +60,14 @@ L<Storable> module is required.
 =head1 SEE ALSO
 
 L<Lingua::ZH::Romanize::Cantonese>
+L<Lingua::JA::Romanize::Japanese>
+L<Lingua::KO::Romanize::Hangul>
 
-http://www.kawa.net/works/ajax/romanize/chinese-e.html
+http://www.kawa.net/works/perl/romanize/romanize-e.html
 
 =head1 AUTHOR
 
-Yusuke Kawasaki <u-suke [at] kawa.net>
-
-http://www.kawa.net/
+Yusuke Kawasaki http://www.kawa.net/
 
 =head1 COPYRIGHT
 
@@ -87,7 +91,7 @@ behalf.
     use Carp;
     use Storable;
     use vars qw( $VERSION );
-    $VERSION = "0.11";
+    $VERSION = "0.12";
 # ----------------------------------------------------------------
 sub new {
     my $package = shift;
@@ -101,7 +105,14 @@ sub new {
 sub char {
     my $self = shift;
     my $char = shift;
-    $self->{$char} if exists $self->{$char};
+    return unless exists $self->{$char};
+    $self->{$char};
+}
+# ----------------------------------------------------------------
+sub chars {
+    my $self = shift;
+    my @array = $self->string( shift );
+    join( " ", map {$#$_>0 ? $_->[1] : $_->[0]} @array );
 }
 # ----------------------------------------------------------------
 sub string {

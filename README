@@ -21,20 +21,20 @@ SYNOPSIS
 DESCRIPTION
     Pinyin is a phonemic notation of Chinese characters.
 
-        $conv = Lingua::ZH::Romanize::Pinyin->new();
-
+  $conv = Lingua::ZH::Romanize::Pinyin->new();
     This constructer methods returns a new object with its dictionary
     cached.
 
-        $roman = $conv->char( $hanji );
-
+  $roman = $conv->char( $hanji );
     This method returns romanized letters of a Hanji character. It returns
     undef when $hanji is not a valid Hanji character. The argument's
     encoding must be UTF-8. Both of Simplified Chinese and Traditional
     Chinese are allowed.
 
-        @array = $conv->string( $string );
+  $roman = $conv->chars( $string );
+    This method returns romanized letters of Hanji characters.
 
+  @array = $conv->string( $string );
     This method returns a array of referenced arrays which are pairs of a
     Hanji chacater and its romanized letters.
 
@@ -44,20 +44,19 @@ DESCRIPTION
 
 DICTIONARY
     This module's Hanji to roman mapping table is based on PY.tit file which
-    was distributed with cxterm.
+    is distributed with cxterm.
 
 MODULE DEPENDENCIES
     Storable module is required.
 
 SEE ALSO
-    Lingua::ZH::Romanize::Cantonese
+    Lingua::ZH::Romanize::Cantonese Lingua::JA::Romanize::Japanese
+    Lingua::KO::Romanize::Hangul
 
-    http://www.kawa.net/works/ajax/romanize/chinese-e.html
+    http://www.kawa.net/works/perl/romanize/romanize-e.html
 
 AUTHOR
-    Yusuke Kawasaki <u-suke [at] kawa.net>
-
-    http://www.kawa.net/
+    Yusuke Kawasaki http://www.kawa.net/
 
 COPYRIGHT
     Copyright (c) 2003-2006 Yusuke Kawasaki. All rights reserved.

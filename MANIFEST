@@ -6,10 +6,10 @@ README
 MANIFEST
 cxterm/dict/big5/CTLauBig5.tit
 cxterm/dict/big5/PY.tit
-cxterm/dict/gb/CCDOSPY.tit
 cxterm/dict/gb/CTLau.tit
 cxterm/dict/gb/PY.tit
 cxterm/Doc/README
 t/cantonese.t
 t/pinyin.t
 META.yml
+Changes
