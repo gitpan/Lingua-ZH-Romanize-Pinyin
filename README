@@ -19,7 +19,7 @@ SYNOPSIS
         }
 
 DESCRIPTION
-    Pinyin is a phonemic notation of Chinese characters.
+    Pinyin is a phonemic notation for Chinese characters.
 
   $conv = Lingua::ZH::Romanize::Pinyin->new();
     This constructer methods returns a new object with its dictionary

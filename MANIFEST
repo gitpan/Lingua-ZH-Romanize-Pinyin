@@ -9,7 +9,8 @@ cxterm/dict/big5/PY.tit
 cxterm/dict/gb/CTLau.tit
 cxterm/dict/gb/PY.tit
 cxterm/Doc/README
-t/cantonese.t
-t/pinyin.t
 META.yml
 Changes
+make-dist.sh
+t/cantonese.t
+t/pinyin.t

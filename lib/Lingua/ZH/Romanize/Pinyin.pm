@@ -22,7 +22,7 @@ Lingua::ZH::Romanize::Pinyin - Romanization of Standard Chinese language
 
 =head1 DESCRIPTION
 
-Pinyin is a phonemic notation of Chinese characters.
+Pinyin is a phonemic notation for Chinese characters.
 
 =head2 $conv = Lingua::ZH::Romanize::Pinyin->new();
 
@@ -85,61 +85,61 @@ parties that need it to utilize a product sold or licensed on your
 behalf.
 
 =cut
-# ----------------------------------------------------------------
-    package Lingua::ZH::Romanize::Pinyin;
-    use strict;
-    use Carp;
-    use Storable;
-    use vars qw( $VERSION );
-    $VERSION = "0.12";
-# ----------------------------------------------------------------
+
+package Lingua::ZH::Romanize::Pinyin;
+use strict;
+use Carp;
+use Storable;
+use vars qw( $VERSION );
+$VERSION = "0.13";
+
 sub new {
     my $package = shift;
-    my $store = shift || &_detect_store( $package );
+    my $store = shift || &_detect_store($package);
     Carp::croak "$! - $store\n" unless ( -r $store );
-    my $self = Storable::retrieve( $store ) or Carp::croak "$! - $store\n";
+    my $self = Storable::retrieve($store) or Carp::croak "$! - $store\n";
     bless $self, $package;
     $self;
 }
-# ----------------------------------------------------------------
+
 sub char {
     my $self = shift;
     my $char = shift;
     return unless exists $self->{$char};
     $self->{$char};
 }
-# ----------------------------------------------------------------
+
 sub chars {
-    my $self = shift;
-    my @array = $self->string( shift );
-    join( " ", map {$#$_>0 ? $_->[1] : $_->[0]} @array );
+    my $self  = shift;
+    my @array = $self->string(shift);
+    join( " ", map { $#$_ > 0 ? $_->[1] : $_->[0] } @array );
 }
-# ----------------------------------------------------------------
+
 sub string {
-    my $self = shift;
-    my $src = shift;
+    my $self  = shift;
+    my $src   = shift;
     my $array = [];
     while ( $src =~ /([\300-\377][\200-\277]+)|([\000-\177]+)/sg ) {
-        if ( defined $1 ) {                             # Chinese
-            my $pair = [ $1 ];
+        if ( defined $1 ) {    # Chinese
+            my $pair = [$1];
             $pair->[1] = $self->{$1} if exists $self->{$1};
             push( @$array, $pair );
-        } else {
-            push( @$array, [ $2 ] );                    # ASCII
+        }
+        else {
+            push( @$array, [$2] );    # ASCII
         }
     }
     @$array;
 }
-# ----------------------------------------------------------------
+
 #   Pinyin.pm -> Pinyin.store
 #   Cantonese.pm -> Cantonese.store
-# ----------------------------------------------------------------
+
 sub _detect_store {
     my $package = shift;
-    my $store = $INC{join( "/", split("::","$package.pm"))};
+    my $store = $INC{ join( "/", split( "::", "$package.pm" ) ) };
     $store =~ s#\.pm$#.store# or Carp::croak "Invalid module name: $package\n";
     $store;
 }
-# ----------------------------------------------------------------
-;1;
-# ----------------------------------------------------------------
+
+1;

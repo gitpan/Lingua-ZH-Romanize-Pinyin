@@ -56,15 +56,14 @@ parties that need it to utilize a product sold or licensed on your
 behalf.
 
 =cut
-# ----------------------------------------------------------------
-    package Lingua::ZH::Romanize::Cantonese;
-    use strict;
-    use vars qw( $VERSION @ISA );
-    $VERSION = "0.12";
-    @ISA = qw( Lingua::ZH::Romanize::Pinyin );
-    use Lingua::ZH::Romanize::Pinyin;
-# ----------------------------------------------------------------
+
+package Lingua::ZH::Romanize::Cantonese;
+use strict;
+use vars qw( $VERSION @ISA );
+$VERSION = "0.13";
+@ISA     = qw( Lingua::ZH::Romanize::Pinyin );
+use Lingua::ZH::Romanize::Pinyin;
+
 #   every methods are provided by Lingua::ZH::Romanize::Pinyin!
-# ----------------------------------------------------------------
-;1;
-# ----------------------------------------------------------------
+
+1;
